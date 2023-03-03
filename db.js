@@ -21,6 +21,8 @@ sequelize.sync({
 
 }).then(()=>{
     console.log("Base de datos actualizada");
+}).catch(()=>{
+    console.log("No connection");
 });
 
 module.exports = {Director};
