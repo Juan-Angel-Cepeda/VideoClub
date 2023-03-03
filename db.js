@@ -8,7 +8,7 @@ const directorModel = require('./models/director');
 //Objeto de configuración del ORM
 
 const sequelize = new Sequelize('video-club',
-'root','admin',{
+'root','secret',{
     //objeto de configuración Host y dialecto
     host:'127.0.0.1',
     dialect:'mysql'
