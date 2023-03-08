@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const directorModel = require('./models/director');
+const genreModel = require('./models/genre');
 
 //conexion para base de datos
 //nombre DB
@@ -15,6 +16,7 @@ const sequelize = new Sequelize('video-club',
 });
 
 const Director = directorModel(sequelize, Sequelize);
+const Genre = genreModel(sequelize,Sequelize);
 
 sequelize.sync({
     force:true,
@@ -25,6 +27,7 @@ sequelize.sync({
     console.log("No connection");
 });
 
-module.exports = {Director};
+module.exports = {Director,Genre};
+
 
 
