@@ -2,6 +2,8 @@ const Sequelize = require('sequelize');
 const directorModel = require('./models/director');
 const genreModel = require('./models/genre');
 const movieModel = require('./models/movie');
+const actorModel = require('./models/actor');
+const movieActorModel = require('./models/movie_actor');
 
 //conexion para base de datos
 //nombre DB
@@ -18,7 +20,10 @@ const sequelize = new Sequelize('video-club',
 
 const Director = directorModel(sequelize, Sequelize);
 const Genre = genreModel(sequelize,Sequelize);
+const Actor = actorModel(sequelize,Sequelize);
 const Movie = movieModel(sequelize,Sequelize);
+const MovieActor = movieActorModel(sequelize,Sequelize);
+
 
 //un genero puede tener muchas peliculas 
 Genre.hasMany(Movie, {as:'movies'});
@@ -30,6 +35,24 @@ Director.hasMany(Movie,{as:'movies'});
 //Una pelicula puede tener un director
 Movie.belongsTo(Director,{as:'director'});
 
+//Un actor participa en muchas peliculas
+MovieActor.belongsTo(Movie,{foreignKey:'moviesId'});
+
+//En una pelicula participan muchos actores
+MovieActor.belongsTo(Actor,{foreignKey:'actorId'});
+
+Movie.belongsToMany(Actor,{
+    foreignKey:'actorId',
+    as:'actors',
+    through: 'movies_actors'
+});
+
+Actor.belongsToMany(Movie,{
+    foreignKey: 'movieId',
+    as: 'movies',
+    through: 'movies_actors'
+});
+
 
 sequelize.sync({
     force:true,
@@ -40,7 +63,7 @@ sequelize.sync({
     console.log("No connection");
 });
 
-module.exports = {Director,Genre,Movie};
+module.exports = {Director,Genre,Movie,Actor};
 
 
 

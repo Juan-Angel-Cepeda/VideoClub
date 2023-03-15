@@ -32,6 +32,7 @@ app.use('/users', usersRouter);
 app.use('/directors',directorsRouter);
 app.use('/genres',genresRouter);
 app.use('/movies',moviesRouter);
+app.use('/actors',actorsRouter);
 
 
 // catch 404 and forward to error handler
