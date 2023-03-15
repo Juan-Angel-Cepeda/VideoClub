@@ -1,7 +1,10 @@
 const express = require('express');
+const { Movie } = require('../db');
 
 function list(req, res, next){
-    res.send('respond with a list');  
+    Movie.findAll({include:['genre','director']})
+        .then(objects => res.json(objects))
+        .catch(err => res.send(err));
 };
 
 function index(req, res, next){
@@ -9,9 +12,20 @@ function index(req, res, next){
 };
 
 function create(req, res, next){
-    let name = req.body.name;
-    let lastname = req.body.lastname;
-    res.send(`respond with a a created name = ${name} and lastname = ${lastname}`);  
+    let tile = req.body.title;
+    const genreId = req.body.genreId;
+    const directorId = req.body.directorId;
+    
+    let movie = new Object({
+        title:tile,
+        genreId:genreId,
+        directorId:directorId
+    });
+
+    Movie.create(movie)
+        .then(obj=>res.json(obj))
+        .catch(err => res.send(err));
+
 };
 
 function replace(req, res, next){
