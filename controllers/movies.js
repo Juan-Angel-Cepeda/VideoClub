@@ -40,4 +40,9 @@ function destroy(req, res, next){
     res.send(`respond with a destroy =${req.params.id}`);  
 };
 
-module.exports = {list,index,create,update,destroy,replace};
+function addActor(req,res,next){
+    const idMovie = req.body.idMovie;
+    const idActor = req.body.idActor;
+}
+
+module.exports = {list,index,create,update,destroy,replace,addActor};
