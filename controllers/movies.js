@@ -46,7 +46,7 @@ function addActor(req,res,next){
     const idActor = req.body.idActor;
 
 
-Movie.findByPk(idMovie).then(movie => {
+    Movie.findByPk(idMovie).then(movie => {
     Actor.findByPk(idActor).then(actor=>{
         movie.addActor(actor)
         res.json(movie);

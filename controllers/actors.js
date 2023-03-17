@@ -23,7 +23,7 @@ function create(req, res, next){
         lastname:lastname
     });
 
-    Actor.create(director)
+    Actor.create(actor)
             .then(obj => res.json(obj))
             .catch(err => res.send(err));
 };
