@@ -1,21 +1,30 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var directorsRouter = require('./routes/directors');
-var copiesRouter = require('./routes/copies');
-var membersRouter = require('./routes/members');
-var bookingsRouter = require('./routes/bookings');
-var actorsRouter = require('./routes/actors');
-var movies_actorsRouter = require('./routes/movies_actors');
-var moviesRouter = require('./routes/movies');
-var genresRouter = require('./routes/genres');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const directorsRouter = require('./routes/directors');
 
-var app = express();
+// "mongdb"://<dbUser>?:<dbPass>?@?<direction>:<port>/<dbName>
+const uri = "mongodb://localhost:27017/video-club-app";
+mongoose.connect(uri);
+const db = mongoose.connection;
+
+const app = express();
+
+db.on('open',()=>{
+  console.log("Conexion ok");
+})
+
+db.on('error',()=>{
+  console.log("NO se ha podido iniciar la conexion");
+})
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,9 +39,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/directors',directorsRouter);
-app.use('/genres',genresRouter);
-app.use('/movies',moviesRouter);
-app.use('/actors',actorsRouter);
+//app.use('/genres',genresRouter);
+//app.use('/actors',actorsRouter);
+//app.use('/movies',moviesRouter);
 
 
 // catch 404 and forward to error handler

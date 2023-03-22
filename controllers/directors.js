@@ -1,64 +1,43 @@
 const express = require('express');
-const {Director} = require('../db');
+const Director = require('../models/director');
+
 
 function list(req, res, next){
-    Director.findAll()
-            .then(objects => res.json(objects))
-            .catch(err => res.send(err));
+    res.send('respond with a list');  
 };
 
 function index(req, res, next){
-    const id = req.params.id;
-    Director.findByPk(id)
-            .then(object => res.json(object))
-            .catch(err => res.send(err));
+    res.send(`respond with a index = ${req.params.id}`);  
 };
 
 function create(req, res, next){
     let name = req.body.name;
-    let lastname = req.body.lastname;
-
-    let director = new Object({
+    let lastName = req.body.lastName;
+    
+    let director = new Director({
         name:name,
-        lastname:lastname
+        lastName:lastName
     });
 
-    Director.create(director)
-            .then(obj => res.json(obj))
-            .catch(err => res.send(err));
+    director.save().then(obj => res.status(200).json({
+        message:"Director creado correctamente",
+        obj:obj
+    })).catch(ex => res.status(500).json({
+        message:"No se pudo almacenar el director",
+        obj:ex
+    }));
 };
 
 function replace(req, res, next){
-    const id = req.params.id;
-    Director.findByPk(id)
-            .then((object)=>{
-                const name = req.body.name ? req.body.name :"";
-                const lastName = req.body.lastName ? req.body.lastNamename :"";
-                object.update({name:name,lastName:lastName})
-                .then(obj => res.json(obj))
-                .catch(err => res.send(err));
-            })
-            .catch(err => res.send(err));
-    }
+    res.send(`respond with a replace =${req.params.id}`);  
+};
 
 function update(req, res, next){
-    const id = req.params.id;
-    Director.findByPk(id)
-            .then((object)=>{
-                const name = req.body.name ? req.body.name :object.name;
-                const lastName = req.body.lastName ? req.body.lastNamename: object.lastName;
-                object.update({name:name,lastName:lastName})
-                .then(obj => res.json(obj))
-                .catch(err => res.send(err));
-            })
-            .catch(err => res.send(err));
+    res.send(`respond with an update =${req.params.id}`);  
 };
 
 function destroy(req, res, next){
-    const id = req.params.id;
-    Director.destroy({where:{id:id}})
-            .then(obj => res.json(obj))
-            .catch(err => res.send(err));
+    res.send(`respond with a destroy =${req.params.id}`);  
 };
 
 module.exports = {list,index,create,update,destroy,replace};
