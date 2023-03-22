@@ -13,12 +13,12 @@ function index(req, res, next){
 };
 
 function create(req, res, next){
-    let tile = req.body.title;
+    const title = req.body.title;
     const genreId = req.body.genreId;
     const directorId = req.body.directorId;
     
     let movie = new Object({
-        title:tile,
+        title:title,
         genreId:genreId,
         directorId:directorId
     });
@@ -30,15 +30,35 @@ function create(req, res, next){
 };
 
 function replace(req, res, next){
-    res.send(`respond with a replace =${req.params.id}`);  
+    const id = req.params.id;
+    Movie.findByPk(id)
+            .then((object)=>{
+                const genreId = req.body.genreId ? req.body.genreId :"";
+                const directorId = req.body.directorId ? req.body.directorId :"";
+                object.update({genreId:genreId,directorId:directorId})
+                .then(obj => res.json(obj))
+                .catch(err => res.send(err));
+            })
+            .catch(err => res.send(err));
 };
 
 function update(req, res, next){
-    res.send(`respond with an update =${req.params.id}`);  
+    Movie.findByPk(id)
+    .then((object)=>{
+        const genreId = req.body.genreId ? req.body.genreId :object.genreId;
+        const directorId = req.body.directorId ? req.body.directorId :object.directorId;
+        object.update({genreId:genreId,directorId:directorId})
+        .then(obj => res.json(obj))
+        .catch(err => res.send(err));
+    })
+    .catch(err => res.send(err));
 };
 
 function destroy(req, res, next){
-    res.send(`respond with a destroy =${req.params.id}`);  
+    const id = req.params.id;
+    Movie.destroy({where:{id:id}})
+        .then(obj=res.json(obj))
+        .catch(err => res.send(err));
 };
 
 function addActor(req,res,next){

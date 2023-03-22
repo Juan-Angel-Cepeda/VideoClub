@@ -4,6 +4,7 @@ const genreModel = require('./models/genre');
 const movieModel = require('./models/movie');
 const actorModel = require('./models/actor');
 const movieActorModel = require('./models/movie_actor');
+const bookingModel = require('./models/booking');
 
 //conexion para base de datos
 //nombre DB
@@ -23,6 +24,7 @@ const Genre = genreModel(sequelize,Sequelize);
 const Actor = actorModel(sequelize,Sequelize);
 const Movie = movieModel(sequelize,Sequelize);
 const MovieActor = movieActorModel(sequelize,Sequelize);
+const Booking = bookingModel(sequelize,Sequelize);
 
 
 //un genero puede tener muchas peliculas 
@@ -63,7 +65,7 @@ sequelize.sync({
     console.log("No connection");
 });
 
-module.exports = {Director,Genre,Movie,Actor};
+module.exports = {Director,Genre,Movie,Actor,Booking};
 
 
 

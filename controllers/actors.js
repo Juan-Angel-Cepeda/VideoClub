@@ -39,7 +39,7 @@ function replace(req, res, next){
                 .catch(err => res.send(err));
             })
             .catch(err => res.send(err));
-    }
+}
 
 function update(req, res, next){
     const id = req.params.id;
