@@ -1,5 +1,5 @@
 const express = require('express');
-const { Movie } = require('../db');
+const {Movie} = require('../db');
 const {Actor} = require('../db');
 
 function list(req, res, next){
@@ -16,6 +16,7 @@ function create(req, res, next){
     const title = req.body.title;
     const genreId = req.body.genreId;
     const directorId = req.body.directorId;
+    
     
     let movie = new Object({
         title:title,
@@ -67,10 +68,11 @@ function addActor(req,res,next){
 
 
     Movie.findByPk(idMovie).then(movie => {
-    Actor.findByPk(idActor).then(actor=>{
-        movie.addActor(actor)
-        res.json(movie);
-    })
+            Actor.findByPk(idActor)
+                .then(actor=>{
+                    movie.addActor(actor)
+                    res.json(movie);
+                })
 }).catch(err => res.send(err));
 }
 

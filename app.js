@@ -11,7 +11,6 @@ var copiesRouter = require('./routes/copies');
 var membersRouter = require('./routes/members');
 var bookingsRouter = require('./routes/bookings');
 var actorsRouter = require('./routes/actors');
-var movies_actorsRouter = require('./routes/movies_actors');
 var moviesRouter = require('./routes/movies');
 var genresRouter = require('./routes/genres');
 
@@ -20,6 +19,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
 
 app.use(logger('dev'));
 app.use(express.json());

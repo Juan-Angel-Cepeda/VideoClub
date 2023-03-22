@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+
 const directorModel = require('./models/director');
 const genreModel = require('./models/genre');
 const movieModel = require('./models/movie');
@@ -20,10 +21,10 @@ const sequelize = new Sequelize('video-club',
     dialect:'mysql'
 });
 
+const Movie = movieModel(sequelize,Sequelize);
 const Director = directorModel(sequelize, Sequelize);
 const Genre = genreModel(sequelize,Sequelize);
 const Actor = actorModel(sequelize,Sequelize);
-const Movie = movieModel(sequelize,Sequelize);
 const MovieActor = movieActorModel(sequelize,Sequelize);
 const Booking = bookingModel(sequelize,Sequelize);
 const Member = memberModel(sequelize,Sequelize);
@@ -60,11 +61,9 @@ Actor.belongsToMany(Movie,{
 
 sequelize.sync({
     force:true,
-}).then(()=>{
+    }).then(()=>{
     console.log("Base de datos actualizada");
-}).catch(()=>{
-    console.log("Sin conexion");
-});
+    });
 
 module.exports = {Director,Genre,Movie,Actor,Booking,Member};
 
