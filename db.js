@@ -5,6 +5,7 @@ const movieModel = require('./models/movie');
 const actorModel = require('./models/actor');
 const movieActorModel = require('./models/movie_actor');
 const bookingModel = require('./models/booking');
+const memberModel = require('./models/member');
 
 //conexion para base de datos
 //nombre DB
@@ -25,6 +26,7 @@ const Actor = actorModel(sequelize,Sequelize);
 const Movie = movieModel(sequelize,Sequelize);
 const MovieActor = movieActorModel(sequelize,Sequelize);
 const Booking = bookingModel(sequelize,Sequelize);
+const Member = memberModel(sequelize,Sequelize);
 
 
 //un genero puede tener muchas peliculas 
@@ -58,14 +60,13 @@ Actor.belongsToMany(Movie,{
 
 sequelize.sync({
     force:true,
-
 }).then(()=>{
     console.log("Base de datos actualizada");
 }).catch(()=>{
-    console.log("No connection");
+    console.log("Sin conexion");
 });
 
-module.exports = {Director,Genre,Movie,Actor,Booking};
+module.exports = {Director,Genre,Movie,Actor,Booking,Member};
 
 
 
