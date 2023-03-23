@@ -7,6 +7,7 @@ const actorModel = require('./models/actor');
 const movieActorModel = require('./models/movie_actor');
 const bookingModel = require('./models/booking');
 const memberModel = require('./models/member');
+const copyModel = require('./models/copy');
 
 //conexion para base de datos
 //nombre DB
@@ -28,7 +29,7 @@ const Actor = actorModel(sequelize,Sequelize);
 const MovieActor = movieActorModel(sequelize,Sequelize);
 const Booking = bookingModel(sequelize,Sequelize);
 const Member = memberModel(sequelize,Sequelize);
-
+const Copy = copyModel(sequelize,Sequelize);
 
 //un genero puede tener muchas peliculas 
 Genre.hasMany(Movie, {as:'movies'});
@@ -51,12 +52,25 @@ Movie.belongsToMany(Actor,{
     as:'actors',
     through: 'movies_actors'
 });
-
 Actor.belongsToMany(Movie,{
     foreignKey: 'movieId',
     as: 'movies',
     through: 'movies_actors'
 });
+
+
+//una pelicula tiene muchas copias
+Movie.hasMany(Copy,{as:"copies"});
+//una copia pertenece a una pelicula
+Copy.belongsTo(Movie,{as:'movie'});
+
+//una reserva tiene muchas copias
+Booking.hasMany(Copy,{as:"copies"});
+//una copia pertenece a una reserva
+Copy.belongsTo(Booking,{as:"booking"});
+
+Member.hasMany(Booking,{as:"bookings"});
+Booking.belongsTo(Member,{as:"memeber"});
 
 
 sequelize.sync({
@@ -65,7 +79,7 @@ sequelize.sync({
     console.log("Base de datos actualizada");
     });
 
-module.exports = {Director,Genre,Movie,Actor,Booking,Member};
+module.exports = {Director,Genre,Movie,Actor,Booking,Member,Copy};
 
 
 
