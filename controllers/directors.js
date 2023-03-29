@@ -59,11 +59,30 @@ function replace(req, res, next){
                 message:"No se pudo remplazar el director",
                 obj:ex
             }));
-
 };
 
 function update(req, res, next){
-    res.send(`respond with an update =${req.params.id}`);  
+    const id = req.params.id;
+    let name = req.body.name;
+    let lastName = req.body.lastName;
+
+    let director = new Object();
+
+    if(name){
+        director._name = name;
+    }
+    if(lastName){
+        director._lastName = lastName;
+    }
+
+    Director.findOneAndUpdate({"_id":id},director)
+            .then(obj => res.status(200).json({
+                message:"Director actuaizado correctamente",
+                obj:obj
+            })).catch(ex => res.status(500).json({
+                message:"No se pudo remplazar el director",
+                obj:ex
+            }));
 };
 
 function destroy(req, res, next){

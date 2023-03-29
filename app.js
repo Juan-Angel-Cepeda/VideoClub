@@ -10,7 +10,7 @@ const usersRouter = require('./routes/users');
 const directorsRouter = require('./routes/directors');
 
 // "mongdb"://<dbUser>?:<dbPass>?@?<direction>:<port>/<dbName>
-const uri = "mongodb://localhost:27017/video-club-app";
+const uri = "mongodb://localhost:27017/videoclub";
 mongoose.connect(uri);
 const db = mongoose.connection;
 
@@ -23,8 +23,6 @@ db.on('open',()=>{
 db.on('error',()=>{
   console.log("NO se ha podido iniciar la conexion");
 })
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,9 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/directors',directorsRouter);
-//app.use('/genres',genresRouter);
-//app.use('/actors',actorsRouter);
-//app.use('/movies',moviesRouter);
+
 
 
 // catch 404 and forward to error handler
