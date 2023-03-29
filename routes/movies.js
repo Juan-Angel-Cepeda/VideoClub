@@ -13,7 +13,7 @@ router.put('/:id',controller.replace);
 
 router.patch('/:id',controller.update);
 
-router.patch('/add/actor',controller.addActor);
+//router.patch('/add/actor',controller.addActor);
 
 router.delete('/:id',controller.destroy);
 
