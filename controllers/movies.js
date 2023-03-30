@@ -1,3 +1,4 @@
+const { json } = require('express');
 const express = require('express');
 const Director = require('../models/director');
 const Movie = require('../models/movie');
@@ -5,7 +6,13 @@ const Movie = require('../models/movie');
 
 
 function list(req, res, next){
-    res.send('respond with a list movies');  
+    Movie.find().populate("_director").then(objs => res.status(200).json({
+        message: "Listado de peliculas",
+        obj: objs
+    })).catch( ex => res.status(500).json({
+        message: "No se pudieron listar las peliculas",
+        obj: ex
+    }));
 };
 
 function index(req, res, next){
