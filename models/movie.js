@@ -5,6 +5,10 @@ const schema = mongoose.Schema({
     _director: {
         type:mongoose.Schema.ObjectId,
         ref:'Director'
+    },
+    _genre:{
+        type:mongoose.Schema.ObjectId,
+        ref:'Genre'
     }
 });
 

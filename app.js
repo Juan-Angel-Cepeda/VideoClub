@@ -13,6 +13,7 @@ const moviesRouter = require('./routes/movies');
 const membersRouter = require('./routes/members');
 const actorRouter = require('./routes/actors');
 const genreRouter = require('./routes/genres');
+const awaitListRouter = require('./routes/awaitList');
 
 
 const jwtKey = "0deec8e659b8b570e53e8d54244ea0f7";
