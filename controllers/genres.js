@@ -1,7 +1,14 @@
 const express = require('express');
+const Genre = require('../models/actor');
 
 function list(req, res, next){
-    res.send('respond with a list');  
+    Genre.find().then(objs => res.status(200).json({
+        message:"Lista de generos",
+        obj:objs
+    })).catch(ex => res.status(500).json({
+        message:"Error en la consulta",
+        obj:ex
+    }))
 };
 
 function index(req, res, next){

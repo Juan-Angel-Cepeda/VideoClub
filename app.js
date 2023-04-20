@@ -4,12 +4,18 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const {expressjwt} = require('express-jwt');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const directorsRouter = require('./routes/directors');
 const moviesRouter = require('./routes/movies');
-const membersRouter = require('./routes/members')
+const membersRouter = require('./routes/members');
+const actorRouter = require('./routes/actors');
+const genreRouter = require('./routes/genres');
+
+
+const jwtKey = "0deec8e659b8b570e53e8d54244ea0f7";
 
 // "mongdb"://<dbUser>?:<dbPass>?@?<direction>:<port>/<dbName>
 const uri = "mongodb://localhost:27017/videoclub";
@@ -36,13 +42,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use(expressjwt({secret:jwtKey, algorithms:['HS256']})
+    .unless({path:["/login"]}));
+
+app.use('/',indexRouter);
 app.use('/users', usersRouter);
 app.use('/directors',directorsRouter);
 app.use('/movies',moviesRouter);
 app.use('/members',membersRouter);
-
-
+app.use('/actor',actorRouter);
+app.use('/genres',genreRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
