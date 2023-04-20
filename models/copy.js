@@ -8,7 +8,7 @@ const schema = mongoose.schema({
         default:'DVD'
     },
     _movie:{
-        type:mongoose.Schema,ObjectId,
+        type:mongoose.Schema.ObjectId,
         ref:'Movie'
     },
     _status:{
