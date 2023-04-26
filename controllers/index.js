@@ -22,31 +22,31 @@ function login(req, res, next){
                 console.log("llego hasta aqui 2"+hash);
                 if(err){
                     res.status(403).json({
-                        message: "Usuario y/o contrasena incorrecto 1",
+                        message: res.__('bad.login'),
                         obj: err
                     });
                 }
                 console.log("llego hasta aqui");
                 if(hash === user.password){
                     res.status(200).json({
-                        message: "Login ok",
+                        message: res.__('ok.login'),
                         obj: jwt.sign({data: user.id,exp: Math.floor(Date.now()/1000)+60}, jwtKey)
                     });
                 }else{
                     res.status(403).json({
-                        message: "Usuario y/o contrasena incorrecto 2",
+                        message: res.__('bad.login'),
                         obj: null
                     });
                 }
             });
         }else{
             res.status(403).json({
-                message: "Usuario y/o contrasena incorrecto 3",
+                message: res.__('bad.login'),
                 obj: null
             });
         }
     }).catch(ex => res.status(403).json({
-        message: "Usuario y/o contrasena incorrecto 4",
+        message: res.__('bad.login'),
         obj: ex
     }));
 }
