@@ -11,6 +11,7 @@ function index(req, res, next) {
 }
 
 async function create(req, res, next) {
+    
     let name = req.body.name;
     let lastname = req.body.lastName;
     let email = req.body.email;
