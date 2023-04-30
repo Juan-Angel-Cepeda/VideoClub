@@ -2,14 +2,6 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-function list(req, res, next) {
-    res.send('respond with a actor list');
-}
-
-function index(req, res, next) {
-    res.send(`respond with a index of a user= ${req.params.id}`);
-}
-
 async function create(req, res, next) {
     
     let name = req.body.name;
@@ -39,23 +31,62 @@ async function create(req, res, next) {
         }));
 }
 
-function replace(req, res, next) {
-    res.send(`respond with a replace userr= ${req.params.id}`);
+
+async function update(req, res, next) {
+    try{
+        const userId = req.params.id;
+        const {currerntPassword, newPassword} = req.body;
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(400).json({
+                message:"User not found"
+            });
+        }
+        const isMatch = await bcrypt.compare(currerntPassword,user.password);
+        if(!isMatch){
+            return res.status(400).json({
+                message:"Password is not correct"
+            })
+
+        }
+        const salt = await bcrypt.genSalt(10);
+        const newPasswordHash = await bcrypt.hash(newPassword,salt);
+        await User.updateOne({"_id":userId},{password:newPasswordHash,salt:salt});
+        res.status(200).json({
+            message:"Password Updated"
+        })
+    }catch( err ){
+        res.status(500).json({
+            message:"Error in update",
+            ex:err
+        });
+    }
 }
 
-function update(req, res, next) {
-    res.send(`respond with a update userr = ${req.params.id}`);
-}
-
-function destroy(req, res, next) {
-    res.send(`respond with a destory userr= ${req.params.id}`);
+async function destroy(req, res, next) {
+    try {
+        const userId = req.params.id;
+        const result = await User.deleteOne({_id: userId});
+        if (result.deletedCount === 1) {
+            res.status(200).json({
+                message: "Usuario eliminado correctamente"
+            });
+        } else {
+            res.status(404).json({
+                message: "No se encontró el usuario con el id proporcionado"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al eliminar el usuario",
+            obj: error
+        });
+    }
+    
 }
 
 module.exports = { 
-    list,
-    index,
     create,
-    replace,
     update,
     destroy
 };
