@@ -51,7 +51,7 @@ async function update(req, res, next) {
         }
         const salt = await bcrypt.genSalt(10);
         const newPasswordHash = await bcrypt.hash(newPassword,salt);
-        await User.updateOne({"_id":userId},{password:newPasswordHash,salt:salt});
+        await User.updateOne({"_id":userId},{password:newPasswordHash,salt:salt})
         res.status(200).json({
             message:"Password Updated"
         })

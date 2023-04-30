@@ -2,7 +2,7 @@ const { json } = require('express');
 const express = require('express');
 const Director = require('../models/director');
 const Movie = require('../models/movie');
-const Actor = require('../controllers/actors');
+const Actor = require('../models/actor');
 const Genre = require('../models/genre');
 
 
@@ -81,16 +81,56 @@ async function replace(req, res, next){
     
 };
 
-async function add_actor_to_cast(movieId="",actorId){
-    
+async function add_actor_to_cast(actorId){
+    actor = await Actor.findOne({"_id":actorId});
+    actors.push(actor)
+    return actors
 };
 
-function update(req, res, next){
-    res.send(`respond with an update =${req.params.id}`);  
+async function update(req, res, next){
+    
+    let id = req.params.id;
+    let title = req.body.title
+    let directorId = req.body.directorId
+    let genreId = req.body.genreId
+    let actorId = req.body.actorId
+
+    let movie = new Object();
+
+    director = await Director.findOne({"_id":directorId});
+    genre = await Genre.findOne({"_id":genreId});
+    actors = add_actor_to_cast(actorId);
+    
+
+    if(title){
+        movie._title = title;
+    }
+    if(genre){
+        movie._genre = genre;
+    }
+    if(actor){
+        movie._actor = actors;
+    }
+    
+    Movie.findOneAndUpdate({"_id":id},movie)
+         .then(obj=>res.status(200).json({
+            message:"Movie updates",
+            obj:obj
+         })).catch(ex => res.status(500).json({
+            message:"Movie not updated",
+            err:ex
+         }))
 };
 
 function destroy(req, res, next){
-    res.send(`respond with a destroy =${req.params.id}`);  
+    const id = req.params.id;
+    Movie.findByIdAndRemove({"_id":id}).then(obj=>res.status(200).json({
+        message:"Movie deleted",
+        obj:obj
+    })).catch(ex => res.status(500).json({
+        message:"Movie not deleted",
+        err:ex
+    }))
 };
 
 module.exports = {list,index,create,update,destroy,replace};
