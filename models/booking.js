@@ -4,11 +4,11 @@ const schema = mongoose.Schema({
     _date:Date,
     _member:{
         type:mongoose.Schema.ObjectId,
-        ref:'member'
+        ref:'Member'
     },
     _copy:{
         type:mongoose.Schema.ObjectId,
-        ref:'copy'
+        ref:'Copy'
     }
 })
 class Booking{
@@ -17,7 +17,7 @@ class Booking{
         copy
     ){
         this._member = member;
-        this._copy = copy
+        this._copy = copy;
     }
     get member(){
         return this._member;
