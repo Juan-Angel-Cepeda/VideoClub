@@ -32,7 +32,7 @@ function create(req, res, next){
         obj:obj
     })).catch(ex => res.status(500).json({
         message:"No se pudo almacenar el genero",
-        obj:ex
+        err:ex
     }));
 
 };
