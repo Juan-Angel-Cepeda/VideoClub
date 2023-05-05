@@ -57,7 +57,7 @@ function replace(req, res, next){
                 obj:obj
             })}).catch(ex => res.status(500).json({
                 message:"No se pudo remplazar el director",
-                obj:ex
+                err:ex
             }));
 };
 
@@ -92,7 +92,7 @@ function destroy(req, res, next){
         obj:obj
     })).catch(ex => res.status(500).json({
         message:"No se pudo eliminar el director",
-        obj:ex
+        err:ex
     }));
 };
 
