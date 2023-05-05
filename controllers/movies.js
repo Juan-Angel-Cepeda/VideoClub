@@ -71,7 +71,7 @@ async function replace(req, res, next){
         _genre:genre,
         _actor:actor
     })
-    Movie.findByIdAndUpdate({"_id":id},movie,{new:true})
+    Movie.findOneAndUpdate({"_id":id},movie,{new:true})
          .then(obj=> {res.status(200).json({
             message:"Movie updated",
             obj:obj
@@ -124,7 +124,7 @@ async function update(req, res, next){
 
 function destroy(req, res, next){
     const id = req.params.id;
-    Movie.findByIdAndRemove({"_id":id}).then(obj=>res.status(200).json({
+    Movie.findOneAndRemove({"_id":id}).then(obj=>res.status(200).json({
         message:"Movie deleted",
         obj:obj
     })).catch(ex => res.status(500).json({

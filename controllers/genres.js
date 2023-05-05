@@ -44,7 +44,7 @@ function replace(req, res, next){
         _description:description
     });
     Genre.findOneAndUpdate({"_id":id},genre,{new : true})
-    .then(obj => {res.status(200).json({
+        .then(obj => {res.status(200).json({
         message: "Genero actualizado correctamente",
         obj:obj
     })}).catch(ex => res.status(500).json({
@@ -77,7 +77,7 @@ function update(req, res, next){
 
 function destroy(req, res, next){
     const id = req.params.id;
-    Genre.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
+    Genre.findOneAndRemove({"_id":id}).then(obj => res.status(200).json({
         message: "Genero eliminado correctamente",
         obj:obj
     })).catch(ex => res.status(500).json({

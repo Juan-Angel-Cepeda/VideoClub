@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const schema = mongoose.schema({
+const schema = mongoose.Schema({
     _member:{
         type:mongoose.Schema.ObjectId,
         ref:'Member'

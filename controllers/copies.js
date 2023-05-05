@@ -92,16 +92,16 @@ async function update(req, res, next){
         copy._status = status;
     }
     if(movieId){
-        let movie = await Movie.findById({"_id":movieId});
+        let movie = await Movie.findOne({"_id":movieId});
         copy._movie = movie
     }
-    Copy.findByIdAndUpdate({"_id":id},copy)
+    Copy.findOneAndUpdate({"_id":id},copy)
         .then(obj=>res.status(200).json({
             message:"Copy updated",
             obj:obj
         })).catch(ex => res.status(500).json({
             message:"Copy not updated",
-            obj:ex
+            err:ex
         }));
 
 };

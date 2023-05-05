@@ -86,7 +86,7 @@ function update(req, res, next){
 
 function destroy(req, res, next){
     const id = req.params.id;
-    Actor.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
+    Actor.findByIdAndDelete({"_id":id}).then(obj => res.status(200).json({
         message: "Actor eliminado correctamente",
         obj:obj
     })).catch(ex => res.status(500).json({

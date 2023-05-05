@@ -7,7 +7,7 @@ function list(req, res, next){
         obj:objs
     })).catch(ex => res.status(500).json({
         message:"No se ha logrado encontrar la lista de socios",
-        obj:ex
+        err:ex
     }))
 };
 
@@ -44,7 +44,7 @@ function create(req, res, next){
         obj:obj
     })).catch(ex => res.status(500).json({
         message: "No se logró crear un socio",
-        obj: ex
+        err: ex
     }))
 };
 
@@ -73,13 +73,13 @@ function replace(req, res, next){
         _address:address
     });
 
-    Member.findByIdAndUpdate({"_id":id},member,{new:true})
+    Member.findOneAndUpdate({"_id":id},member,{new:true})
           .then(obj=>{res.status(200).json({
-            message:"Member updated",
+            message:"Member replaced",
             obj:obj
           })}).catch(ex=> res.status(500).json({
-            message:"Member not updated",
-            obj:ex
+            message:"Member not replaced",
+            err:ex
           }))
 
 };
@@ -120,7 +120,7 @@ function update(req, res, next){
         address._state = state
     }
     member._address = address;
-    Member.findByIdAndUpdate({"_id":id},member)
+    Member.findOneAndUpdate({"_id":id},member)
           .then(obj=>res.status(200).json({
             message:"Member updated",
             obj:obj
@@ -133,7 +133,7 @@ function update(req, res, next){
 
 function destroy(req, res, next){
     const id = req.params.id;
-    Member.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
+    Member.findOneAndRemove({"_id":id}).then(obj => res.status(200).json({
         message: "Member deleted",
         obj:obj
     })).catch(ex => res.status(500).json({

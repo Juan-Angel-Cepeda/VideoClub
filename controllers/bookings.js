@@ -92,7 +92,7 @@ async function update(req, res, next){
     if(copy){
         booking._copy = copy;
     }
-    Booking.findByIdAndUpdate({"_id":id},booking)
+    Booking.findOneAndUpdate({"_id":id},booking)
            .then(obj => res.status(200).json({
             message:"Booking updated",
             obj:obj
@@ -104,7 +104,7 @@ async function update(req, res, next){
 
 function destroy(req, res, next){
     const id = req.params.id;
-    Booking.findByIdAndRemove({"_id":id}.then(obj=>res.status(200).json({
+    Booking.findOneAndUpdate({"_id":id}.then(obj=>res.status(200).json({
         message:"Booking deleted",
         obj:obj
     }))).catch(ex => res.status(500).json({

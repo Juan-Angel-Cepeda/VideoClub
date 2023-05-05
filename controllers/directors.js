@@ -87,7 +87,7 @@ function update(req, res, next){
 
 function destroy(req, res, next){
     const id = req.params.id;
-    Director.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
+    Director.findOneAndDelete({"_id":id}).then(obj => res.status(200).json({
         message: "Director eliminado correctamente",
         obj:obj
     })).catch(ex => res.status(500).json({
