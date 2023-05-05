@@ -1,4 +1,47 @@
 {
-    "ok.login":"Sesión iniciada correctamente",
-    "bad.login":"Usuario y constraseña incorrectos"
+	"ok.login": "Sesión iniciada correctamente",
+	"bad.login": "Usuario y constraseña incorrectos",
+
+	"Actor.list": "Respuesta con lsita de actores",
+	"Actor.noinfo": "Sin información acerca de los actores",
+	"Actor.index": "Actor encontrado",
+	"Actor.created": "Actor creado",
+	"Actor.notCreated": "Actor no creado",
+	"Actor.replaced": "Actor remplazado",
+	"Actor.notReplaced": "Actor no remplazado",
+	"Actor.updated": "Actor actuzalizado",
+	"Actor.notupdated": "Actor no actuzalizado",
+	"Actor.deleted": "Actor elimindado",
+	"Actor.notdeleted": "Actor no elimindado",
+
+	"Awaitlist.list": "Lista de espera",
+    "Awaitlist.not":"Lista de espera no encontrada",
+    "Awaitlist.index":"Lista de espera para un usuario",
+    "Awaitlist.noindex":"Lista de espera no encontrada para un usuario",
+    "Awaitlist.created":"List de espera creada",
+    "Awaitlist.notcreated":"Lista de espera no creada",
+    "Awaitlist.replaced":"Lista de espera no remplazada",
+    "Awaitlist.notreplaced":"Lista de espera no remplazada",
+    "Awaitlist.updated":"Lista de espera actualizada",
+    "Awaitlist.notupdated":"Lista de espera no actualziada",
+    "Awaitlist.destroy":"Lista de espera eliminada",
+    "Awaitlist.notdestroy":"Lista de espera no eliminada",
+    
+    "Booking.list":"Lista de reservacion",
+    "Booking.notlist":"Sin lista de reservacion",
+    "Booking.index":"Reservacion encontrada",
+    "Booking.notindex":"Reservacion no encontrada",
+    "Booking.create":"Reservacion creada",
+    "Booking.notcreated":"Reservacion no creada",
+    "Booking.replaced":"Reservacion remplazada",
+    "Booking.notreplaced":"Reservacion no remplazada",
+    "Booking.updated":"Reservacion actualizada",
+    "Booking.notupdated":"Reservacion no actualizada",
+    "Booking.destroyed":"Reservacion eliminada",
+    "Booking.notdestroyed":"Booking not deleted"
+
+
+
+
+
 }

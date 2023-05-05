@@ -29,6 +29,7 @@ function index(req, res, next){
 };
 
 async function create(req, res, next){
+    
     const title = req.body.title;
     const directorId = req.body.directorId;
     const genreId = req.body.genreId;
@@ -76,7 +77,8 @@ async function replace(req, res, next){
             message:"Movie updated",
             obj:obj
          })}).catch(ex => res.status(500).json({
-            message:"Movie not pudated"
+            message:"Movie not pudated",
+            err:ex
          }))
     
 };

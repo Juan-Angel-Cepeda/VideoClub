@@ -22,7 +22,6 @@ const jwtKey = config.get("secret.key");
 const uri = config.get('dbChain');
 mongoose.connect(uri);
 const db = mongoose.connection;
-
 const app = express();
 
 db.on('open',()=>{
@@ -42,7 +41,6 @@ i18n.configure({
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -58,8 +56,9 @@ app.use('/users', usersRouter);
 app.use('/directors',directorsRouter);
 app.use('/movies',moviesRouter);
 app.use('/members',membersRouter);
-app.use('/actor',actorRouter);
+app.use('/actors',actorRouter);
 app.use('/genres',genreRouter);
+app.use('/awaitList',awaitListRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,12 +1,13 @@
 const express = require('express');
 const Actor = require('../models/actor');
 
+
 function list(req, res, next){
-    Director.find().then(objs => res.status(200).json({
-        message:"lista de actores",
+    Actor.find().then(objs => res.status(200).json({
+        message:res.__("Actor.list"),
         obj:objs
     })).catch(ex => res.status(500).json({
-        message:"No se pudo consultar la información",
+        message:res.__("Actor.noinfo"),
         obj:ex
     }));
 };
@@ -14,10 +15,10 @@ function list(req, res, next){
 function index(req, res, next){
     const id = req.params.id;
     Actor.findOne({"_id":id}).then(obj=>res.status(200).json({
-        message:`Actor con id ${id}`,
+        message: res.__('Actor.index'),
         obj: obj
     })).catch(ex => res.status(500).json({
-            message:"No se pudo consultar la información",
+            message: res.__('Actor.noinfo'),
             obj:ex
         }));
 };
@@ -26,16 +27,16 @@ function create(req, res, next){
     let name = req.body.name;
     let lastName = req.body.lastName;
     
-    let director = new Actor({
+    let actor = new Actor({
         name:name,
         lastName:lastName
     });
 
-    director.save().then(obj => res.status(200).json({
-        message:"Actor creado correctamente",
+    actor.save().then(obj => res.status(200).json({
+        message:res.__('Actor.created'),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"No se pudo almacenar el actor",
+        message:res.__('Actor.notCreated'),
         obj:ex
     }));
 };
@@ -50,12 +51,12 @@ function replace(req, res, next){
         _lastName : lastName
     });
 
-    Director.findOneAndUpdate({"_id":id},actor,{new : true})
+    Actor.findOneAndUpdate({"_id":id},actor,{new : true})
             .then(obj => {res.status(200).json({
-                message: "Actor actualizado correctamente",
+                message:res.__('Actor.replaced'),
                 obj:obj
             })}).catch(ex => res.status(500).json({
-                message:"No se pudo remplazar el director",
+                message:res.__("Actor.notReplaced"),
                 obj:ex
             }));
 };
@@ -76,10 +77,10 @@ function update(req, res, next){
 
     Actor.findOneAndUpdate({"_id":id},actor)
             .then(obj => res.status(200).json({
-                message:"Actor actuaizado correctamente",
+                message:res.__("Actor.updated"),
                 obj:obj
             })).catch(ex => res.status(500).json({
-                message:"No se pudo remplazar el actor",
+                message:res.__("Actor.notupdated"),
                 obj:ex
             }));
 };
@@ -87,10 +88,10 @@ function update(req, res, next){
 function destroy(req, res, next){
     const id = req.params.id;
     Actor.findByIdAndDelete({"_id":id}).then(obj => res.status(200).json({
-        message: "Actor eliminado correctamente",
+        message: res.__("Actor.deleted"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"No se pudo eliminar el actor",
+        message:res.__("Actor.notdeleted"),
         obj:ex
     }));
 };

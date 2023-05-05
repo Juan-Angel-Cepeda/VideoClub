@@ -5,10 +5,10 @@ const Movie = require('../models/movie');
 
 function list(req, res, next){
     AwaitList.find().then(objs=>res.status(200).json({
-        message:"Await list",
+        message:res.__('Awaitlist.list'),
         obj:objs
     })).catch(ex => res.status(500).json({
-        message:"Couldnt find the await list",
+        message:res.__("Awaitlist.not"),
         err:ex
     }))
 };
@@ -16,10 +16,10 @@ function list(req, res, next){
 function index(req, res, next){
     const id = req.params.id;
     AwaitList.findOne({"_id":id}).then(obj => res.status(200).json({
-        message: 'Awaitlist found',
+        message:res.__('Awaitlist.index'),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"No info",
+        message:res.__('Awaitlist.noindex'),
         err:ex
     }))
 };
@@ -37,10 +37,10 @@ async function create(req, res, next){
         movie:movie
     })
     awaitList.save().then(obj=>res.status(200).json({
-        message:"Awaitlist created",
+        message:res.__('Awaitlist.created'),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"Awaitlist not created",
+        message:res.__('Awaitlist.notcreated'),
         err:ex
     }))
 };
@@ -60,10 +60,10 @@ async function replace(req, res, next){
 
     AwaitList.findOneAndUpdate({"_id":id},awaitList,{new:true})
              .then(obj=>{res.status(200).json({
-                message:"Awaitlist replaced",
+                message:res.__("Awaitlist.replaced"),
                 obj:obj
              })}).catch(ex => res.status(500).json({
-                message:"Awaitlist not replaced",
+                message:res.__("Awaitlist.notreplaced"),
                 err:ex
              }))
 
@@ -86,10 +86,10 @@ async function update(req, res, next){
     }
     AwaitList.findOneAndUpdate({"_id":id},awaitList)
              .then(obj=> res.status(200).json({
-                message:"Awaitlist updated",
+                message:res.__('Awaitlist.updated'),
                 obj:obj
              })).catch(ex => res.status(500).json({
-                message:"Awaitlist not updated",
+                message:res.__("Awaitlist.notupdated"),
                 err:ex
              }))
 
@@ -99,10 +99,10 @@ async function update(req, res, next){
 function destroy(req, res, next){
     const id = req.params.id;
     AwaitList.findOneAndDelete({"_id":id}).then(obj=>res.status(200).json({
-        message:"Awaitlist destroyed",
+        message:res.__("Awaitlist.destroy"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"Awaitlist not destroyed",
+        message:res.__("Awaitlist.notdestroy"),
         err:ex
     }))
 };

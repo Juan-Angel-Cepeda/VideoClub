@@ -1,4 +1,32 @@
 {
     "ok.login":"login success",
-    "bad.login":"Incorrect user or password"
+    "bad.login":"Incorrect user or password",
+    
+    "Actor.list":"Response with list of actors",
+    "Actor.noinfo":"No information about actors",
+    "Actor.index":"Actor Found",
+    "Actor.created":"Actor created",
+    "Actor.notCreated":"Actor not created",
+    "Actor.replaced":"Actor replaced",
+    "Actor.notReplaced":"Actor not replaced",
+    "Actor.updated":"Actor updated",
+    "Actor.notupdated":"Actor not updated",
+    "Actor.deleted":"Actor delted",
+    "Actor.notdeleted":"Actor not deleted",
+    
+    "Awaitlist.list":"Showing Await List",
+    "Awaitlist.not":"Await list not Found",
+    "Awaitlist.index":"Await list for a user",
+    "Awaitlist.noindex":"Await list not found",
+    "Awaitlist.created":"Await list created",
+    "Awaitlist.notcreated":"Await list no created",
+    "Awaitlist.replaced":"Await list replaced",
+    "Awaitlist.notreplaced":"Await list not replaced",
+    "Awaitlist.updated":"Await list updated",
+    "Awaitlist.notupdated":"Await list not updated",
+    "Awaitlist.destroy":"Await list deleted",
+    "Awaitlist.notdestroy":"Await list not deleted"
+
+
+
 }
