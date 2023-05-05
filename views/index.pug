@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Iniciar Sesion 
+  form(action='/login',method='post')
+    label(for='user') Usuario:
+    input(id='user',name='email'type='text',placeholder='usuario')
+    br
+    label(for='password') Contraseña:
+    input(id='password',name='password'type='password',placeholder='Contraseña')
+    br
+    input(type='submit',value='Iniciar Sesion')
+
+  
+
+  
