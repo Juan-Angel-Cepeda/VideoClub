@@ -1,15 +1,22 @@
 const express = require('express');
 const Actor = require('../models/actor');
-
+const log4js = require('log4js');
+var logger = log4js.getLogger();
 
 function list(req, res, next){
-    Actor.find().then(objs => res.status(200).json({
+    Actor.find().then(objs => {
+        logger.level("info");
+        logger.info(res.__("Actor.list"));
+        res.status(200).json({
         message:res.__("Actor.list"),
         obj:objs
-    })).catch(ex => res.status(500).json({
+    })}).catch(ex => {
+        logger.level("error");
+        logger.error(res.__('Actor.noinfo'));
+        res.status(500).json({
         message:res.__("Actor.noinfo"),
         obj:ex
-    }));
+    })});
 };
 
 function index(req, res, next){
