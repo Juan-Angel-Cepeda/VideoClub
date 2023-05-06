@@ -3,10 +3,10 @@ const Member = require('../models/member');
 
 function list(req, res, next){
     Member.find().then(objs => res.status(200).json({
-        message:"Lista de socios",
+        message:res.__("Member.list"),
         obj:objs
     })).catch(ex => res.status(500).json({
-        message:"No se ha logrado encontrar la lista de socios",
+        message:res.__("Member.notlist"),
         err:ex
     }))
 };
@@ -14,10 +14,10 @@ function list(req, res, next){
 function index(req, res, next){
     const id = req.params.id;
     Member.findOne({"_id":id}).then(obj=>res.status(200).json({
-        message: `Member with id ${id}`,
+        message:res.__("Member.index"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"No info",
+        message:res.__("Member.notindex"),
         err:ex
     }))
 };
@@ -40,10 +40,10 @@ function create(req, res, next){
         address: address,
     })
     member.save().then(obj => res.status(200).json({
-        message: "Socio creado correctamente",
+        message: res.__("Member.create"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message: "No se logró crear un socio",
+        message: res.__("Member.notcreate"),
         err: ex
     }))
 };
@@ -75,10 +75,10 @@ function replace(req, res, next){
 
     Member.findOneAndUpdate({"_id":id},member,{new:true})
           .then(obj=>{res.status(200).json({
-            message:"Member replaced",
+            message:res.__("Member.replaced"),
             obj:obj
           })}).catch(ex=> res.status(500).json({
-            message:"Member not replaced",
+            message:res.__("Member.notreplaced"),
             err:ex
           }))
 
@@ -122,10 +122,10 @@ function update(req, res, next){
     member._address = address;
     Member.findOneAndUpdate({"_id":id},member)
           .then(obj=>res.status(200).json({
-            message:"Member updated",
+            message:res.__("Member.update"),
             obj:obj
           })).catch(ex => res.status(500).json({
-            message:"Memeber not udpated",
+            message:res.__("Member.notupdate"),
             err:ex
           }))
     
@@ -134,10 +134,10 @@ function update(req, res, next){
 function destroy(req, res, next){
     const id = req.params.id;
     Member.findOneAndRemove({"_id":id}).then(obj => res.status(200).json({
-        message: "Member deleted",
+        message:res.__("Member.delete"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"Member not deleted",
+        message:res.__("Member.notdeleted"),
         obj:ex
     }));
 };

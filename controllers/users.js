@@ -23,10 +23,10 @@ async function create(req, res, next) {
     });
 
     user.save().then(obj => res.status(200).json({
-        message: "Usuario creado correctamente",
+        message: res.__("user.create"),
         obj: obj
         })).catch(ex => res.status(500).json({
-            message: "No se pudo almacenar el usuario",
+            message: res.__("user.notcreate"),
             obj: ex
         }));
 }
@@ -39,13 +39,13 @@ async function update(req, res, next) {
         const user = await User.findById(userId);
         if(!user){
             return res.status(400).json({
-                message:"User not found"
+                message:res.__("user.notfound")
             });
         }
         const isMatch = await bcrypt.compare(currerntPassword,user.password);
         if(!isMatch){
             return res.status(400).json({
-                message:"Password is not correct"
+                message:res.__("user.incorrectpass")
             })
 
         }
@@ -53,11 +53,11 @@ async function update(req, res, next) {
         const newPasswordHash = await bcrypt.hash(newPassword,salt);
         await User.updateOne({"_id":userId},{password:newPasswordHash,salt:salt})
         res.status(200).json({
-            message:"Password Updated"
+            message:res.__("user.update")
         })
     }catch( err ){
         res.status(500).json({
-            message:"Error in update",
+            message:res.__("user.notupdate"),
             ex:err
         });
     }
@@ -69,16 +69,16 @@ async function destroy(req, res, next) {
         const result = await User.deleteOne({_id: userId});
         if (result.deletedCount === 1) {
             res.status(200).json({
-                message: "Usuario eliminado correctamente"
+                message:res.__("user.delete")
             });
         } else {
             res.status(404).json({
-                message: "No se encontró el usuario con el id proporcionado"
+                message:res.__("user.notfound")
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "Error al eliminar el usuario",
+            message: res.__("user.notdeleted"),
             obj: error
         });
     }

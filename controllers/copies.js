@@ -4,10 +4,10 @@ const Movie = require('../models/movie');
 
 function list(req, res, next){
     Copy.find().then(objs => res.status(200).json({
-        message: "copies list",
+        message: res.__("Copy.list"),
         obj:objs
     })).catch(ex => res.status(500).json({
-        message:"Error en la consulta",
+        message:res.__("Copy.notlist"),
         obj:ex
     }))
 };
@@ -15,10 +15,10 @@ function list(req, res, next){
 function index(req, res, next){
     const id = req.params.id;
     Copy.findOne({"_id":id}).then(obj=>res.status(200).json({
-        message: `Copy with id ${id}`,
+        message: res.__("Copy.index"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"No info",
+        message:res.__("Copy.notindex"),
         err:ex
     }))
 };
@@ -38,10 +38,10 @@ async function create(req, res, next){
         status:status
     });
     copy.save().then(obj => res.status(200).json({
-        message:"Copy created",
+        message:res.__("Copy.created"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"Copy not created",
+        message:res.__("Copy.notcreated"),
         err:ex
     }))
 
@@ -65,10 +65,10 @@ async function replace(req, res, next){
 
     Movie.findOneAndUpdate({"_id":id},copy,{new:true})
          .then(obj => {res.status(200).json({
-            message:"Copy update",
+            message:res.__("Copy.replaced"),
             obj:obj
         })}).catch(ex => res.status(500).json({
-            message:"Director not update",
+            message:res__("Copy.notreplaced"),
             err:ex
         }));
 };
@@ -97,10 +97,10 @@ async function update(req, res, next){
     }
     Copy.findOneAndUpdate({"_id":id},copy)
         .then(obj=>res.status(200).json({
-            message:"Copy updated",
+            message:res.__("Copy.updated"),
             obj:obj
         })).catch(ex => res.status(500).json({
-            message:"Copy not updated",
+            message:res.__("Copy.notupdated"),
             err:ex
         }));
 
@@ -109,10 +109,10 @@ async function update(req, res, next){
 function destroy(req, res, next){
     const id = req.params.id;
     Copy.findOneAndDelete({"_id":id}).then(obj=>res.status(200).json({
-        message:"Copy deleted",
+        message:res.__("Copy.deleted"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"Copy not deleted",
+        message:res.__("Copy.notdeleted"),
         err:ex
     }));
 };

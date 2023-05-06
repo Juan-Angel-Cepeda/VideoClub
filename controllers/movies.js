@@ -9,10 +9,10 @@ const Genre = require('../models/genre');
 
 function list(req, res, next){
     Movie.find().populate("_director").then(objs => res.status(200).json({
-        message: "Listado de peliculas",
+        message:res.__("Movie.list"),
         obj: objs
     })).catch( ex => res.status(500).json({
-        message: "No se pudieron listar las peliculas",
+        message:res.__("Movie.notlist"),
         obj: ex
     }));
 };
@@ -20,10 +20,10 @@ function list(req, res, next){
 function index(req, res, next){
     const id = req.params.id;
     Movie.findOne({"_id":id}).then(obj=>res.status(200).json({
-        message:`Movie con id ${id}`,
+        message:res.__("Movie.index"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"No info",
+        message:res.__("Movie.noindex"),
         err:ex
     }))
 };
@@ -47,10 +47,10 @@ async function create(req, res, next){
     })
 
     movie.save().then(obj => res.status(200).json({
-        message: "Pelicula creada correctamente",
+        message: res.__("Movie.create"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message: "No se ha logrado crear la pelicula",
+        message: res.__("Movie.notcreate"),
         err: ex
     }))
 };
@@ -74,10 +74,10 @@ async function replace(req, res, next){
     })
     Movie.findOneAndUpdate({"_id":id},movie,{new:true})
          .then(obj=> {res.status(200).json({
-            message:"Movie updated",
+            message:res.__("Movie.replace"),
             obj:obj
          })}).catch(ex => res.status(500).json({
-            message:"Movie not pudated",
+            message:res.__("Movie.notreplace"),
             err:ex
          }))
     
@@ -116,10 +116,10 @@ async function update(req, res, next){
     
     Movie.findOneAndUpdate({"_id":id},movie)
          .then(obj=>res.status(200).json({
-            message:"Movie updates",
+            message:res.__("Movie.update"),
             obj:obj
          })).catch(ex => res.status(500).json({
-            message:"Movie not updated",
+            message:res.__("Movie.notupdate"),
             err:ex
          }))
 };
@@ -127,10 +127,10 @@ async function update(req, res, next){
 function destroy(req, res, next){
     const id = req.params.id;
     Movie.findOneAndRemove({"_id":id}).then(obj=>res.status(200).json({
-        message:"Movie deleted",
+        message:res.__("Movie.delete"),
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:"Movie not deleted",
+        message:res.__("Movie.notdelete"),
         err:ex
     }))
 };
