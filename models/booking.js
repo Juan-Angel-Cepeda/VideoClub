@@ -32,5 +32,5 @@ class Booking{
         this._copy = value;
     }
 }
-schema.loadCass(Booking);
+schema.loadClass(Booking);
 module.exports = mongoose.model('Booking',schema)

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const schema = mongoose.schema({
+const schema = mongoose.Schema({
     _number:Number,
     _format:{
         type:String,
