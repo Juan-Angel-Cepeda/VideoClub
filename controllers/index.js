@@ -8,7 +8,12 @@ function home(req, res, next){
     res.render('index', {title: 'Express'});
 }
 
+function loginrender(req,res,next){
+    res.render('login',{title:'Login screen'})
+}
+
 function login(req, res, next){
+
     const email = req.body.email;
     const password = req.body.password;
     const jwtKey = config.get("secret.key");
@@ -53,5 +58,6 @@ function login(req, res, next){
 
 module.exports = {
     home,
-    login
+    login,
+    loginrender
 };
