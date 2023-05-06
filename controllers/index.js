@@ -9,7 +9,7 @@ function home(req, res, next){
 }
 
 function loginrender(req,res,next){
-    res.render('login',{title:'Login screen'})
+    res.render('index',{title:'Login screen'})
 }
 
 function login(req, res, next){
