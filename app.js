@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const {expressjwt} = require('express-jwt');
 const config = require('config');
 const i18n = require('i18n');
+const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -48,8 +49,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(i18n.init);
 
+app.use(cors({
+  origin:"http://127.0.0.1:8080"
+}));
+
 app.use(expressjwt({secret:jwtKey, algorithms:['HS256']})
-    .unless({path:["/login"]}));
+    .unless({path:["/login","/directors"]}));
 
 app.use('/',indexRouter);
 app.use('/users', usersRouter);
@@ -59,6 +64,7 @@ app.use('/members',membersRouter);
 app.use('/actors',actorRouter);
 app.use('/genres',genreRouter);
 app.use('/awaitList',awaitListRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
