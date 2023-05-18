@@ -8,6 +8,7 @@ const {expressjwt} = require('express-jwt');
 const config = require('config');
 const i18n = require('i18n');
 const cors = require('cors');
+const mustacheExpress = require('mustache');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -40,8 +41,11 @@ i18n.configure({
 })
 
 // view engine setup
+app.engine('mustache',mustacheExpress());
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'mustache');
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -22,7 +22,8 @@
     "log4js": "^6.9.1",
     "mongoose": "^7.0.2",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "mustache": "^4.2.0",
+    "mustache-express": "^1.3.2"
   },
   "devDependencies": {
     "jest": "^29.5.0",
